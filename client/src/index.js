@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import './css/stil.css';
+import './css/foundation.css';
+import './css/app.css';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import { unregister as unregisterServiceWorker } from './registerServiceWorker';

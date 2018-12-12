@@ -19,7 +19,9 @@ const AuthorizationLink = ({
     '&locale=' + locale;
 
   return (
-    <Button href={link}>Connect Bank</Button>
+    <div className="large-12 cell">
+      <a className="button large" href={link} style={{ marginTop: '-130px' }}>Get your financial year breakdown</a>
+    </div>
   );
 };
 

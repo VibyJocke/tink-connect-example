@@ -1,7 +1,5 @@
 import React from 'react';
-import Header from './Header';
 import AuthorizationLink from './AuthorizationLink';
-import { BasicDropdown } from './BasicDropdown';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -14,11 +12,11 @@ export default class Main extends React.Component {
   }
 
   onSelectMarket(value) {
-    this.setState({market: value});
+    this.setState({ market: value });
   }
 
   onSelectLocale(value) {
-    this.setState({locale: value});
+    this.setState({ locale: value });
   }
 
   render() {
@@ -27,29 +25,33 @@ export default class Main extends React.Component {
       market,
     } = this.state;
     return (
-      <div>
-        <Header text="Hello!" emoji="money" />
+      <div className="section-hero">
 
-        <p>We can help you analyze your financial status.</p>
-        <p>
-          Or actually we can’t. We’re just a simple example app.
-          But you can connect your bank to see your account data, transactions and investments!
-        </p>
+        <div className="grid-container">
+          <div className="grid-x grid-padding-x">
 
-        <div style={{padding: '50px 0 10px 0'}}>
-          <BasicDropdown
-            name="Choose a market" items={['SE', 'FI', 'NO', 'DK']}
-            onSelect={(value) => this.onSelectMarket(value)} style={{marginBottom: '30px'}}
-          />
+            <div className="large-6 cell">
+              <h1>Your financial year</h1>
+              <h2>— a breakdown</h2>
+            </div>
+
+            <div className="large-4 large-offset-1 cell">
+
+              <div className="card-dark text-center">
+                <img src="example-1.png" style={{ paddingBottom: '30px' }} />
+                <h4>Largest transaction of the year</h4>
+                <p>What purchase was larger than the rest?</p>
+              </div>
+
+              <div className="card-dark text-center" style={{ marginTop: '30px' }}>
+                <img src="example-2.png" style={{ paddingBottom: '30px' }} />
+                <h4>Your favourite vendor</h4>
+                <p>Do you have a favorite restaurant that you often visit?</p>
+              </div>
+
+            </div>
+          </div>
         </div>
-
-        <div style={{padding: '10px 0 50px 0'}}>
-          <BasicDropdown
-            name="Choose a locale" items={['en_US', 'sv_SE', 'da_DK', 'no_NO', 'fi_FI']}
-            onSelect={(value) => this.onSelectLocale(value)} style={{marginBottom: '30px'}}
-          />
-        </div>
-
         <AuthorizationLink
           scope="accounts:read,transactions:read,investments:read,user:read"
           market={market} locale={locale}
