@@ -1,0 +1,15 @@
+.section-hero {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/bg-coin.png");
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  margin-right: 50px;
+}
+
+.card-dark {
+  background: #2D5D67;
+  box-shadow: 0 8px 18px 0 rgba(0,0,0,0.06);
+  padding: 50px 40px 30px 40px;
+  border-radius: 6px;
+}
