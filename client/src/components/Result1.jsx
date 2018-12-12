@@ -5,6 +5,7 @@ export default class Result1 extends React.Component {
     super(props);
 
     this.state = {
+      numTransactions: 4123
     };
   }
 
@@ -24,9 +25,9 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-6 distance cell">
-              <h1 style={{ fontSize: '17rem' }}>4,123</h1>
-              <p>The amount of transactions you made during 2018. That’s an average of <strong>11,3 per day</strong>. Impressive!</p>
-              <a className="button large" href="result-2.html">Continue</a>
+              <h1 style={{ fontSize: '17rem' }}>{this.state.numTransactions}</h1>
+              <p>The amount of transactions you made during 2018. That’s an average of <strong>{this.state.numTransactions / 365} per day</strong>. Impressive!</p>
+              <a className="button large" href="result-2">Continue</a>
             </div>
 
           </div>
