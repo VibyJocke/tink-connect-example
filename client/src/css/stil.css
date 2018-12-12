@@ -7,9 +7,47 @@
   margin-right: 50px;
 }
 
+.section-result1 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #00414B 0%, #2D5D67 100%);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.section-result2 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #2D5D67 0%, #427783 100%);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.section-result3 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #00414B 0%, #2D5D67 100%);
+  background-repeat: no-repeat;
+  background-position: bottom left;
+}
+
+.section-result5 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #FEE8E1 0%, #FBD8CC 100%);
+}
+
 .card-dark {
   background: #2D5D67;
   box-shadow: 0 8px 18px 0 rgba(0,0,0,0.06);
   padding: 50px 40px 30px 40px;
   border-radius: 6px;
+}
+
+.distance {
+  padding: 80px 0px 0px 0px;
+}
+
+.distance2 {
+  padding: 160px 0px 0px 0px;
 }

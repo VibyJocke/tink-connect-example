@@ -344,7 +344,7 @@ h6, .h6 {
   h2, .h2 {
     font-size: 4.5rem;
     margin: 30px 0px 0px 0px;
-    opacity: 0.8; }
+    opacity: 1; }
   h3, .h3 {
     font-size: 1.9375rem; }
   h4, .h4 {
@@ -1083,8 +1083,8 @@ select {
     .button.hollow.disabled, .button.hollow.disabled:hover, .button.hollow.disabled:focus, .button.hollow[disabled], .button.hollow[disabled]:hover, .button.hollow[disabled]:focus {
       background-color: transparent; }
     .button.hollow:hover, .button.hollow:focus {
-      border-color: #ac3309;
-      color: #ac3309; }
+      border-color: #D47F61;
+      color: #D47F61; }
       .button.hollow:hover.disabled, .button.hollow:hover[disabled], .button.hollow:focus.disabled, .button.hollow:focus[disabled] {
         border: 1px solid #F89572;
         color: #F89572; }

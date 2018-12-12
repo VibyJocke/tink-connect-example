@@ -11,14 +11,6 @@ export default class Main extends React.Component {
     };
   }
 
-  onSelectMarket(value) {
-    this.setState({ market: value });
-  }
-
-  onSelectLocale(value) {
-    this.setState({ locale: value });
-  }
-
   render() {
     const {
       locale,
@@ -38,13 +30,13 @@ export default class Main extends React.Component {
             <div className="large-4 large-offset-1 cell">
 
               <div className="card-dark text-center">
-                <img src="example-1.png" style={{ paddingBottom: '30px' }} />
+                <img src="example-1.png" alt="" style={{ paddingBottom: '30px' }} />
                 <h4>Largest transaction of the year</h4>
                 <p>What purchase was larger than the rest?</p>
               </div>
 
               <div className="card-dark text-center" style={{ marginTop: '30px' }}>
-                <img src="example-2.png" style={{ paddingBottom: '30px' }} />
+                <img src="example-2.png" alt="" style={{ paddingBottom: '30px' }} />
                 <h4>Your favourite vendor</h4>
                 <p>Do you have a favorite restaurant that you often visit?</p>
               </div>
