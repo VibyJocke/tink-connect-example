@@ -51,11 +51,11 @@ export default class Main extends React.Component {
 
             </div>
           </div>
+          <AuthorizationLink
+            scope="accounts:read,transactions:read,investments:read,user:read"
+            market={market} locale={locale}
+          />
         </div>
-        <AuthorizationLink
-          scope="accounts:read,transactions:read,investments:read,user:read"
-          market={market} locale={locale}
-        />
       </div>
     );
   }
