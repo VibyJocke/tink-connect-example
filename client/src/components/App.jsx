@@ -5,6 +5,7 @@ import { Container } from 'reactstrap';
 import Main from './Main';
 import Result1 from './Result1';
 import Result2 from './Result2';
+import Result3 from './Result3';
 
 const App = () => (
   <Container>
@@ -13,6 +14,7 @@ const App = () => (
       <Route exact path="/callback" component={Callback} />
       <Route exact path="/result-1" component={Result1} />
       <Route exact path="/result-2" component={Result2} />
+      <Route exact path="/result-3" component={Result3} />
     </Switch>
   </Container>
 );
