@@ -9,13 +9,13 @@ export default class Result7 extends React.Component {
     this.state = {
       topCategories: [{
         name: 'Restaurants',
-        img: 'icon-restaurants1.png'
+        img: 'icon-restaurants@2x.png'
       }, {
         name: 'Bars',
-        img: 'icon-bars1.png'
+        img: 'icon-bars@2x.png'
       }, {
         name: 'Shopping',
-        img: 'icon-shoppings1.png'
+        img: 'icon-shoppings@2x.png'
       }]
     };
   }
