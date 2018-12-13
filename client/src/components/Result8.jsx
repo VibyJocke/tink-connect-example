@@ -5,16 +5,16 @@ export default class Result8 extends React.Component {
     super(props);
 
     this.state = {
-        name: 'Home',
-        class: 'home',
-        amount: 48349
-//        { name: 'Beauty', class: 'beauty' },
-//        { name: 'Home', class: 'home' },
-//        { name: 'Leisure', class: 'leisure' },
-//        { name: 'Property', class: 'property' },
-//        { name: 'Restaurants', class: 'restaurants' },
-//        { name: 'Shopping', class: 'shopping' },
-//        { name: 'Transport', class: 'transport' },
+      name: 'Home',
+      class: 'home',
+      amount: 48349
+      //        { name: 'Beauty', class: 'beauty' },
+      //        { name: 'Home', class: 'home' },
+      //        { name: 'Leisure', class: 'leisure' },
+      //        { name: 'Property', class: 'property' },
+      //        { name: 'Restaurants', class: 'restaurants' },
+      //        { name: 'Shopping', class: 'shopping' },
+      //        { name: 'Transport', class: 'transport' },
     };
   }
 
