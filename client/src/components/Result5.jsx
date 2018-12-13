@@ -4,11 +4,10 @@ export default class Result1 extends React.Component {
   constructor(props) {
     super(props);
 
+    var result = JSON.parse(localStorage.getItem('result'))
+
     this.state = {
-      transaction: {
-        numPurchases: 83,
-        description: 'McDonalds'
-      }
+      topVendor: result.topThreeVendors.first
     };
   }
 
@@ -23,8 +22,8 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-6 distance cell">
-              <h4 style={{ color: '#FAB097' }}>Whoa...! You made a total purchases at {this.state.transaction.description} of</h4>
-              <h1 style={{ color: '#262626', fontSize: '17rem' }}>{this.state.transaction.numPurchases}</h1>
+              <h4 style={{ color: '#FAB097' }}>Whoa...! You made a total purchases at {this.state.topVendor.spot} of</h4>
+              <h1 style={{ color: '#262626', fontSize: '17rem' }}>{this.state.topVendor.count}</h1>
             </div>
 
             <div className="large-4 large-offset-2 cell" style={{ marginTop: '- 100px' }}>
