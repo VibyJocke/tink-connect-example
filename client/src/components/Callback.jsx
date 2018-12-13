@@ -123,7 +123,7 @@ class Main extends React.Component {
   updateLargestTransaction(transaction) {
     if (!this.results.largestTransaction
       || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
-      this.results.largestTransaction = transaction;
+      this.results.largestTransaction = Math.abs(transaction);
     }
   }
 
@@ -154,13 +154,15 @@ class Main extends React.Component {
   }
 
   updateTopCategory(transaction, category) {
+    var transactionAmount = Math.abs(transaction.amount);
     var categoryName = category.primaryName;
     if (this.isDrinkingRelatedTransaction(transaction, category)) {
       categoryName = "Drinking";
     }
+    if(categoryName === 'Food & Drinks') console.log(transaction)
     this.topCategoryResult[categoryName] ?
-      this.topCategoryResult[categoryName] += 1
-      : this.topCategoryResult[categoryName] = 1;
+      this.topCategoryResult[categoryName] += transactionAmount
+      : this.topCategoryResult[categoryName] = transactionAmount;
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
@@ -171,7 +173,7 @@ class Main extends React.Component {
       return b[1] - a[1];
     });
     for (var i = 0; sortable.length > 3 && i < 3; ++i) {
-      this.results.topCategory[this.indexToString(i)] = { category: sortable[i][0], count: sortable[i][1] };
+      this.results.topCategory[this.indexToString(i)] = { category: sortable[i][0], amount: sortable[i][1] };
     }
   }
 
@@ -264,7 +266,7 @@ class Main extends React.Component {
         <div className="grid-x grid-padding-x">
 
           <div className="large-12 text-center cell">
-            <h3 style={{ paddingTop: '20px' }}>Failed to fetch you data 😞</h3>
+            <h3 style={{ paddingTop: '20px' }}>Failed to fetch you data <span role="img">😞</span></h3>
           </div>
 
           <Button style={{ margin: '30px' }} href="/">Take me back</Button>
