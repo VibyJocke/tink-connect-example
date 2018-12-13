@@ -13,7 +13,7 @@ export default class Result5 extends React.Component {
 
   render() {
     return (
-      <div class="section-result5">
+      <div className="section-result5">
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
 

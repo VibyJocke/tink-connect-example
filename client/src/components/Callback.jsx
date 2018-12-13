@@ -131,11 +131,12 @@ class Main extends React.Component {
     return categoryData.find(category => category.id === transaction.categoryId);
   }
 
-  updateTransactionsPerMonth(transaction) {
+  updateSpendingPerMonth(transaction) {
+    var transactionAmount = Math.abs(transaction.amount);
     var date = new Date(transaction.date);
     this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] ?
-      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] += 1 :
-      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] = 1;
+      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] += transactionAmount :
+      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] = transactionAmount;
   }
 
   isNonBoringTransaction(transaction, category) {
@@ -146,6 +147,10 @@ class Main extends React.Component {
       && category.code !== "exponses:home.incurences-fees"
       && category.code.indexOf("transfers:savings") === -1
       && !transaction.description.match(/.*(save|spar).*/i);
+  }
+
+  isExpense(transaction, category) {
+    return category.type !== "EXPENSE";
   }
 
   isDrinkingRelatedTransaction(transaction, category) {
@@ -225,7 +230,9 @@ class Main extends React.Component {
         this.updateTotalSpend(transaction);
         this.updateTopCategory(transaction, transactionCategory);
         this.updateNumberOfTransactions();
-        this.updateTransactionsPerMonth(transaction);
+      }
+      if(this.isExpense(transaction, transactionCategory)) {
+        this.updateSpendingPerMonth(transaction);
       }
     }
   }
