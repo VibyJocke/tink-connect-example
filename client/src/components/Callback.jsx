@@ -146,7 +146,7 @@ class Main extends React.Component {
       && category.code !== "expenses:home.rent"
       && category.code !== "expenses:home.utilities"
       && category.code !== "exponses:home.incurences-fees"
-      && category.code.indexOf("transfers:savings") === -1
+      && category.code.indexOf("transfers") === -1
       && !transaction.description.match(/.*(save|spar).*/i);
   }
 
