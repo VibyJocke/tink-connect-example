@@ -6,8 +6,10 @@ export default class Result2 extends React.Component {
 
     var results = JSON.parse(localStorage.getItem('result'));
 
+    console.log(results);
+
     this.state = {
-      largestTransaction: results.largestTransaction.amount
+      largestTransaction: Math.abs(results.largestTransaction.amount)
     };
   }
 

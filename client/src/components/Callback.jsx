@@ -11,7 +11,7 @@ class Main extends React.Component {
 
   results = {
     topThreeVendors: {},
-    largestTransaction: undefined,
+    largestTransaction: 0,
     numberOfTransactions: 0,
     totalSpend: 0,
     topCategory: {},
@@ -123,7 +123,7 @@ class Main extends React.Component {
   updateLargestTransaction(transaction) {
     if (!this.results.largestTransaction
       || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
-      this.results.largestTransaction = Math.abs(transaction);
+      this.results.largestTransaction = transaction;
     }
   }
 
@@ -159,7 +159,13 @@ class Main extends React.Component {
     if (this.isDrinkingRelatedTransaction(transaction, category)) {
       categoryName = "Drinking";
     }
-    if(categoryName === 'Food & Drinks') console.log(transaction)
+    if (categoryName === 'Home Improvements' || categoryName == 'Household & Services') {
+        categoryName = 'Home'
+    }
+    if (categoryName === 'Other') {
+        return;
+    }
+
     this.topCategoryResult[categoryName] ?
       this.topCategoryResult[categoryName] += transactionAmount
       : this.topCategoryResult[categoryName] = transactionAmount;

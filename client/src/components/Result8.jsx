@@ -4,18 +4,25 @@ export default class Result8 extends React.Component {
   constructor(props) {
     super(props);
 
+    var topCategory = JSON.parse(localStorage.getItem('result')).topCategory;
+    console.log(topCategory)
+
     this.state = {
-      name: 'Home',
-      class: 'home',
-      amount: 48349
-      //        { name: 'Beauty', class: 'beauty' },
-      //        { name: 'Home', class: 'home' },
-      //        { name: 'Leisure', class: 'leisure' },
-      //        { name: 'Property', class: 'property' },
-      //        { name: 'Restaurants', class: 'restaurants' },
-      //        { name: 'Shopping', class: 'shopping' },
-      //        { name: 'Transport', class: 'transport' },
+      name: topCategory.first.category,
+      class: this.getClass(topCategory.first.category),
+      amount: Math.floor(topCategory.first.amount)
     };
+  }
+
+  getClass(name) {
+    if(name === 'Health & Beauty') return 'beauty'
+    else if(name === 'Home') return 'home'
+    else if(name === 'Leisure') return 'leisure'
+    else if(name === 'Property') return 'property'
+    else if(name === 'Food & Drinks') return 'restaurants'
+    else if(name === 'Shopping') return 'shopping'
+    else if(name === 'Transport') return 'transport'
+    else return 'shopping'
   }
 
   render() {
