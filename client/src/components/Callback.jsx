@@ -11,6 +11,19 @@ class Main extends React.Component {
     data: undefined,
   };
 
+  results = {
+    topThreeVendors: [{}],
+    largestTransaction: {},
+    numberOfTransactions: 0,
+    totalSpend: 0,
+    topCategory: {},
+    transactionsPerMonth: {},
+    spendVsAveragePopulation: {}
+  };
+
+  topThreeResult = {};
+  topCategoryResult = {};
+
   getData = async (code) => {
     const response = await fetch('/code', {
       method: 'POST',
@@ -105,56 +118,99 @@ class Main extends React.Component {
     }
   }
 
-  getBiggestTransaction(transactionData, categoryData, currency) {
-    var biggestTransaction = {amount: 0};
-    for (var i = 0; i < transactionData.length; ++i) {
-      var transaction = transactionData[i].transaction;
-      var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
-      if (transactionCategory.type === "INCOME"
-          || transactionCategory.code === "expenses:home.mortgage"
-          || transaction.description.match(/.*(save|spar).*/i)) {
-        continue;
-      }
-      if (biggestTransaction.amount === 0
-          || Math.abs(biggestTransaction.amount) < Math.abs(transaction.amount)) {
-        biggestTransaction = transaction
-      }
-    }
+  // getBiggestTransaction(transactionData, categoryData, currency) {
+  //   var biggestTransaction = {amount: 0};
+  //   for (var i = 0; i < transactionData.length; ++i) {
+  //     var transaction = transactionData[i].transaction;
+  //     var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
+  //     if (this.isNonBoringTransaction(transaction, transactionCategory)) {
+  //       if (biggestTransaction.amount === 0
+  //           || Math.abs(biggestTransaction.amount) < Math.abs(transaction.amount)) {
+  //         biggestTransaction = transaction
+  //       }
+  //     } else {
+  //       continue
+  //     }
+  //   }
+  //
+  //   return biggestTransaction;
+  // }
 
-    return biggestTransaction;
+  updateLargestTransaction(transaction) {
+    if (!this.results.largestTransaction
+        || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
+      this.results.largestTransaction = transaction;
+    }
   }
 
   getCategoryForTransaction(transaction, categoryData) {
     return categoryData.find(category => category.id === transaction.categoryId);
   }
 
-  getTopThreeSpendingSpot(transactionData, categoryData) {
-    var result = {};
+  isNonBoringTransaction(transaction, category) {
+    return category.type !== "INCOME"
+           && category.code !== "expenses:home.mortgage"
+           && category.code !== "expenses:home.rent"
+           && category.code !== "expenses:home.utilities"
+           && category.code !== "exponses:home.incurences-fees"
+           && !transaction.description.match(/.*(save|spar).*/i);
+  }
+
+  isDrinkingRelatedTransaction(transaction, category) {
+    return category.code === "exponses:food.bars"
+           || transaction.description.match(/.*(systembolaget).*/i);
+  }
+
+  getDrinkingSpending(transactionData, categoryData) {
+    var amount = 0;
+    var count = 0;
     for (var i = 0; i < transactionData.length; ++i) {
       var transaction = transactionData[i].transaction;
       var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
-      if (transactionCategory.type === "INCOME"
-          || transactionCategory.code === "expenses:home.mortgage"
-          || transaction.description.match(/.*(save|spar).*/i)) {
-        continue;
+      if (this.isDrinkingRelatedTransaction(transaction, transactionCategory)) {
+        //this.results. += Math.abs(transaction.amount);
+        count++;
       }
-      result[transaction.description] ? result[transaction.description] += 1 : result[transaction.description] = 1;
     }
+    console.log("Count: " + count);
+    return amount;
+  }
+
+  updateTopCategory(transaction, category) {
+    this.topCategoryResult[category.code] ?
+      this.topCategoryResult[category.code] += 1
+      : this.topCategoryResult[category.code] = 1;
 
     var sortable = [];
-    for (var spot in result) {
-        sortable.push([spot, result[spot]]);
+    for (var spot in this.topCategoryResult) {
+        sortable.push([spot, this.topCategoryResult[spot]]);
+    }
+
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+    if (sortable.length > 0) {
+      this.results.topCategory = {category: sortable[0][0], count: sortable[0][1]}
+    }
+  }
+
+  updateTopThreeVendors(transaction, category) {
+    this.topThreeResult[transaction.description] ?
+      this.topThreeResult[transaction.description] += 1
+      : this.topThreeResult[transaction.description] = 1;
+
+    var sortable = [];
+    for (var spot in this.topThreeResult) {
+        sortable.push([spot, this.topThreeResult[spot]]);
     }
 
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
 
-    var res = {};
     for (var i = 0; sortable.length > 3 && i < 3; ++i) {
-       res[this.indexToString(i)] = {"spot": sortable[i][0], "count": sortable[i][1]};
+       this.results.topThreeVendors[this.indexToString(i)] = {"spot": sortable[i][0], "count": sortable[i][1]};
     }
-    return res;
   }
 
   indexToString(index) {
@@ -165,8 +221,34 @@ class Main extends React.Component {
         return "second";
       case 2:
         return "third";
+      default:
+        return "unknown";
     }
-    return "unknown";
+  }
+
+  calculateStatistics(transactionData, categoryData) {
+    for (var i = 0; i < transactionData.length; ++i) {
+      var transaction = transactionData[i].transaction;
+      var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
+      if (this.isNonBoringTransaction(transaction, transactionCategory)) {
+        this.updateLargestTransaction(transaction);
+        this.updateTopThreeVendors(transaction);
+        this.updateTotalSpend(transaction);
+        this.updateTopCategory(transaction, transactionCategory);
+        this.updateNumberOfTransactions();
+      }
+      if (this.isDrinkingRelatedTransaction(transaction, transactionCategory)) {
+        //this.updateDrinkingSpend(transaction);
+      }
+    }
+  }
+
+  updateNumberOfTransactions() {
+    this.results.numberOfTransactions += 1;
+  }
+
+  updateTotalSpend(transaction) {
+    this.results.totalSpend += Math.abs(transaction.amount);
   }
 
   getTransactionDataFromApiResponse(currency) {
@@ -185,38 +267,8 @@ class Main extends React.Component {
     } else {
       var categoryData = data.response.categoryData;
       var transactionData = data.response.transactionData.results;
-      var biggestTransaction = this.getBiggestTransaction(transactionData, categoryData, currency);
-      var topSpots = this.getTopThreeSpendingSpot(transactionData, categoryData);
-      if (biggestTransaction.amount === 0 || topSpots.length === 0) {
-        return (
-          <div>
-            <h4>Oh noes...</h4><br />
-          </div>
-        );
-      }
-      return (
-        <div>
-          <h4 className="pink">Your biggest transaction</h4>
-          <div style={{margin: '30px'}}>
-            <b>{formatDate(new Date(biggestTransaction.date))}</b><br />
-            {biggestTransaction.description}<br />
-            {formatNumber(biggestTransaction.amount)} {currency}<br />
-            {this.getCategoryForTransaction(biggestTransaction, categoryData).primaryName}<br />
-          </div>
-          <div>
-            <h4>Top spending spots</h4>
-            <h5>First</h5>
-            <b>{topSpots["first"].spot}</b><br />
-            <b>{topSpots["first"].count} transactions.</b><br />
-            <h5>Second</h5>
-            <b>{topSpots["second"].spot}</b><br />
-            <b>{topSpots["second"].count} transactions.</b><br />
-            <h5>Third</h5>
-            <b>{topSpots["third"].spot}</b><br />
-            <b>{topSpots["third"].count} transactions.</b><br />
-          </div>
-        </div>
-      );
+      this.calculateStatistics(transactionData, categoryData);
+      console.log(this.results);
     }
   }
 
