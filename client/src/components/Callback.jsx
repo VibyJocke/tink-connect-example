@@ -10,6 +10,7 @@ class Main extends React.Component {
     token: '',
     data: undefined,
   };
+
   getData = async (code) => {
     const response = await fetch('/code', {
       method: 'POST',
@@ -104,6 +105,70 @@ class Main extends React.Component {
     }
   }
 
+  getBiggestTransaction(transactionData, categoryData, currency) {
+    var biggestTransaction = {amount: 0};
+    for (var i = 0; i < transactionData.length; ++i) {
+      var transaction = transactionData[i].transaction;
+      var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
+      if (transactionCategory.type === "INCOME"
+          || transactionCategory.code === "expenses:home.mortgage"
+          || transaction.description.match(/.*(save|spar).*/i)) {
+        continue;
+      }
+      if (biggestTransaction.amount === 0
+          || Math.abs(biggestTransaction.amount) < Math.abs(transaction.amount)) {
+        biggestTransaction = transaction
+      }
+    }
+
+    return biggestTransaction;
+  }
+
+  getCategoryForTransaction(transaction, categoryData) {
+    return categoryData.find(category => category.id === transaction.categoryId);
+  }
+
+  getTopThreeSpendingSpot(transactionData, categoryData) {
+    var result = {};
+    for (var i = 0; i < transactionData.length; ++i) {
+      var transaction = transactionData[i].transaction;
+      var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
+      if (transactionCategory.type === "INCOME"
+          || transactionCategory.code === "expenses:home.mortgage"
+          || transaction.description.match(/.*(save|spar).*/i)) {
+        continue;
+      }
+      result[transaction.description] ? result[transaction.description] += 1 : result[transaction.description] = 1;
+    }
+
+    var sortable = [];
+    for (var spot in result) {
+        sortable.push([spot, result[spot]]);
+    }
+
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+
+    var res = {};
+    for (var i = 0; sortable.length > 3 && i < 3; ++i) {
+       res[this.indexToString(i)] = {"spot": sortable[i][0], "count": sortable[i][1]};
+    }
+    return res;
+  }
+
+  indexToString(index) {
+    switch (index) {
+      case 0:
+        return "first";
+      case 1:
+        return "second";
+      case 2:
+        return "third";
+    }
+    return "unknown";
+  }
+
   getTransactionDataFromApiResponse(currency) {
     const data = this.state.data;
     if (!data || !data.response || !data.response.transactionData || !data.response.categoryData) {
@@ -118,24 +183,37 @@ class Main extends React.Component {
         </div>
       );
     } else {
-      const transactions = data.response.transactionData.results.map(result => {
-        const transaction = result.transaction;
-        const category = data.response.categoryData.find(category => category.id === transaction.categoryId);
+      var categoryData = data.response.categoryData;
+      var transactionData = data.response.transactionData.results;
+      var biggestTransaction = this.getBiggestTransaction(transactionData, categoryData, currency);
+      var topSpots = this.getTopThreeSpendingSpot(transactionData, categoryData);
+      if (biggestTransaction.amount === 0 || topSpots.length === 0) {
         return (
-          <p key={transaction.id}>
-            <b>{formatDate(new Date(transaction.date))}</b><br />
-            {transaction.description}<br />
-            {formatNumber(transaction.amount)} {currency}<br />
-            {category.primaryName}
-          </p>
+          <div>
+            <h4>Oh noes...</h4><br />
+          </div>
         );
-      });
-
+      }
       return (
         <div>
-          <h4 className="pink">Some of your transactions</h4>
+          <h4 className="pink">Your biggest transaction</h4>
           <div style={{margin: '30px'}}>
-            {transactions}
+            <b>{formatDate(new Date(biggestTransaction.date))}</b><br />
+            {biggestTransaction.description}<br />
+            {formatNumber(biggestTransaction.amount)} {currency}<br />
+            {this.getCategoryForTransaction(biggestTransaction, categoryData).primaryName}<br />
+          </div>
+          <div>
+            <h4>Top spending spots</h4>
+            <h5>First</h5>
+            <b>{topSpots["first"].spot}</b><br />
+            <b>{topSpots["first"].count} transactions.</b><br />
+            <h5>Second</h5>
+            <b>{topSpots["second"].spot}</b><br />
+            <b>{topSpots["second"].count} transactions.</b><br />
+            <h5>Third</h5>
+            <b>{topSpots["third"].spot}</b><br />
+            <b>{topSpots["third"].count} transactions.</b><br />
           </div>
         </div>
       );
@@ -144,16 +222,12 @@ class Main extends React.Component {
 
   getContent() {
     const currency = this.state.data ? this.state.data.response.userData.profile.currency : '';
-    const accountsList = this.getAccountsListFromApiResponse(currency);
-    const investmentList = this.getInvestmentDataFromApiResponse();
     const transactionList = this.getTransactionDataFromApiResponse(currency);
 
-    if (accountsList && investmentList && transactionList) {
+    if (transactionList) {
       return (
         <Row>
           <Col lg={{size: 6, offset: 3}}>
-            {accountsList}
-            {investmentList}
             {transactionList}
           </Col>
         </Row>

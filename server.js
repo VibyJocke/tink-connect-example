@@ -109,7 +109,12 @@ async function getTransactionData(token) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token,
     },
-    body: JSON.stringify({limit: 5}),
+    body: JSON.stringify({
+      limit: 10000,
+      endDate: new Date(),
+      startDate: new Date().setFullYear(new Date().getFullYear() -1),
+      sort: "DATE"
+    }),
   });
 
   if (response.status !== 200) {
