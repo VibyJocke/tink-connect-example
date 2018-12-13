@@ -22,7 +22,8 @@ export default class Result9 extends React.Component {
 
             <div className="large-12 distance cell">
               <h2>I believe I spend...</h2>
-              <a className="button large hollow" href="result-10">More</a><a className="button large hollow" style={{ marginLeft: '50px' }} href="result-10">Less</a>
+              <a className="button large hollow" href="result-10">More</a>
+              <a className="button large hollow" style={{ marginLeft: '50px' }} href="result-10">Less</a>
             </div>
 
           </div>

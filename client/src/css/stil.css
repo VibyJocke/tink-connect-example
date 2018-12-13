@@ -123,6 +123,39 @@
   background-size: cover;
 }
 
+.section-result11 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-color: #00343C;
+  background-image: url("../img/charlie-sheen.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result12 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-color: #00343C;
+  background-image: url("../img/jeff.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result13 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-color: #00343C;
+  background-image: url("../img/sweden.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.label-category {
+  background-color: #427783;
+  padding: 20px;
+  border-radius: 3px;
+  margin: 20px 0px 0px 0px;
+}
+
 .card-dark {
   background: #2D5D67;
   box-shadow: 0 8px 18px 0 rgba(0,0,0,0.06);
