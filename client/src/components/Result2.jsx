@@ -25,7 +25,7 @@ export default class Result2 extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <h1 style={{fontSize: '17rem'}}>{this.state.largestTransaction}</h1>
+              <h1 style={{fontSize: '17rem'}}>{Math.floor(this.state.largestTransaction)}</h1>
               <p>You purchased something really expensive. Nice. It’s quality over quantity.</p>
               <a className="button large" href="result-3">Continue</a>
             </div>

@@ -15,7 +15,8 @@ class Main extends React.Component {
     numberOfTransactions: 0,
     totalSpend: 0,
     topCategory: {},
-    transactionsPerMonth: {}
+    transactionsPerMonth: {},
+    alcoholSpend: 0
   };
 
   monthNames = [
@@ -164,7 +165,7 @@ class Main extends React.Component {
     if (this.isDrinkingRelatedTransaction(transaction, category)) {
       categoryName = "Drinking";
     }
-    if (categoryName === 'Home Improvements' || categoryName == 'Household & Services') {
+    if (categoryName === 'Home Improvements' || categoryName === 'Household & Services') {
         categoryName = 'Home'
     }
     if (categoryName === 'Other') {
@@ -174,6 +175,10 @@ class Main extends React.Component {
     this.topCategoryResult[categoryName] ?
       this.topCategoryResult[categoryName] += transactionAmount
       : this.topCategoryResult[categoryName] = transactionAmount;
+
+     if (categoryName === 'Drinking') {
+        this.results.alcoholSpend = this.topCategoryResult[categoryName];
+     }
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
@@ -231,7 +236,7 @@ class Main extends React.Component {
         this.updateTopCategory(transaction, transactionCategory);
         this.updateNumberOfTransactions();
       }
-      if(this.isExpense(transaction, transactionCategory)) {
+      if (this.isExpense(transaction, transactionCategory)) {
         this.updateSpendingPerMonth(transaction);
       }
     }
