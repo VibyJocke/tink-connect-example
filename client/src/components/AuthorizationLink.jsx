@@ -15,12 +15,13 @@ const AuthorizationLink = ({
     ssnData +
     '&grant_type=authorization_code' +
     '&market=' + market +
-    '&locale=' + locale;
+    '&locale=' + locale +
+    '&iframe=true';
 
   return (
-    <div className="large-12 cell">
-      <a className="button large" href={link} style={{ marginTop: '-130px' }}>Get your financial year breakdown</a>
-    </div>
+    <iframe className="tink-link-iframe"
+      src={link}
+    />
   );
 };
 
