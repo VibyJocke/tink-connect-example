@@ -12,8 +12,8 @@ class Main extends React.Component {
   };
 
   results = {
-    topThreeVendors: [{}],
-    largestTransaction: {},
+    topThreeVendors: {},
+    largestTransaction: undefined,
     numberOfTransactions: 0,
     totalSpend: 0,
     topCategory: {},
@@ -248,7 +248,7 @@ class Main extends React.Component {
   }
 
   updateTotalSpend(transaction) {
-    this.results.totalSpend += Math.abs(transaction.amount);
+    this.results.totalSpend += transaction.amount;
   }
 
   getTransactionDataFromApiResponse(currency) {
