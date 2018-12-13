@@ -5,6 +5,16 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
+    var staticResult = {
+      topThreeVendors: [{}],
+      largestTransaction: {},
+      numberOfTransactions: 4123,
+      topCategory: {},
+      transactionsPerMonth: {},
+    }
+
+    localStorage.setItem('result', JSON.stringify(staticResult));
+
     this.state = {
       market: 'SE',
       locale: 'en_US',
