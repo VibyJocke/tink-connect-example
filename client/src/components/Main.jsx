@@ -33,6 +33,42 @@ export default class Main extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('message', this.responseCallback, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('message', this.responseCallback, false);
+  }
+
+  responseCallback = (event: MessageEvent) => {
+    if (
+      !event
+      || !event.data
+      || event.origin !== 'https://oauth.tink.se'
+    ) {
+      return;
+    }
+    const {
+      history,
+      updateData,
+    } = this.props;
+    const {
+      data,
+      type,
+      error,
+    } = JSON.parse(event.data);
+    if (type === 'code') {
+      this.props.history.push('callback?code=' + data);
+    }
+    // TODO handle error
+    // } else if (error && error.status === 'USER_CANCELLED') {
+    //   history.push('/');
+    // } else {
+    //   console.log('Something went wrong');
+    // }
+  };
+
   showIframe = () => {
     this.setState(
       {

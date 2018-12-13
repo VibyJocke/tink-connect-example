@@ -255,7 +255,6 @@ class Main extends React.Component {
       var categoryData = data.response.categoryData;
       var transactionData = data.response.transactionData.results;
       this.calculateStatistics(transactionData, categoryData);
-      console.log(this.results);
       localStorage.setItem('result', JSON.stringify(this.results));
       this.props.history.push('result-1')
     }

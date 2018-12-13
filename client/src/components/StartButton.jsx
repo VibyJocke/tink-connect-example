@@ -6,7 +6,6 @@ class StartButton extends React.Component {
     }
 
     render() {
-      console.log(this.props);
         return (
           <div className="large-12 cell">
             <a className="button large"
