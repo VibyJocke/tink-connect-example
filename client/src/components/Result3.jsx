@@ -4,8 +4,10 @@ export default class Result1 extends React.Component {
   constructor(props) {
     super(props);
 
+    var vendors = JSON.parse(localStorage.getItem('result')).topThreeVendors;
+
     this.state = {
-      topVendors: ['Burger King', 'McDonalds', 'Max']
+      topVendors: [vendors.second, vendors.first, vendors.third]
     };
   }
 

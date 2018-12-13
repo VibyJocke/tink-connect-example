@@ -6,7 +6,11 @@ export default class Main extends React.Component {
     super(props);
 
     var staticResult = {
-      topThreeVendors: [{}],
+      topThreeVendors: {
+        first: 'Burger King',
+        second: 'McDonald\'s',
+        third: 'Max',
+      },
       largestTransaction: {
         amount: 75349,
         category: 'Transport',
