@@ -4,8 +4,11 @@ export default class Result1 extends React.Component {
   constructor(props) {
     super(props);
 
+    var result = JSON.parse(localStorage.getItem('result'))
+
     this.state = {
-      numTransactions: 43
+      topVendor: result.topThreeVendors.first,
+      numTransactions: result.numberOfTransactionsAtTopVendor
     };
   }
 
@@ -20,7 +23,7 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-12 distance text-center cell">
-              <h2>Can you guess how many transactions you made at McDonalds?</h2>
+              <h2>Can you guess how many transactions you made at {this.state.topVendor}?</h2>
             </div>
 
             <div className="large-2 large-offset-3  text-center cell">
@@ -28,11 +31,11 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-2  text-center cell">
-              <a className="button large hollow" href="result-5">{this.state.numTransactions / 2}</a>
+              <a className="button large hollow" href="result-5">{(this.state.numTransactions / (Math.random() + 1)).toFixed(0)}</a>
             </div>
 
             <div className="large-2  text-center cell">
-              <a className="button large hollow" href="result-5">{this.state.numTransactions * 2}</a>
+              <a className="button large hollow" href="result-5">{(this.state.numTransactions * (Math.random() + 1)).toFixed(0)}</a>
             </div>
 
           </div>

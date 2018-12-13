@@ -11,6 +11,7 @@ export default class Main extends React.Component {
         second: 'McDonald\'s',
         third: 'Max',
       },
+      numberOfTransactionsAtTopVendor: 43,
       largestTransaction: {
         amount: 75349,
         category: 'Transport',
