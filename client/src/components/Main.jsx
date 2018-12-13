@@ -7,9 +7,9 @@ export default class Main extends React.Component {
 
     var staticResult = {
       topThreeVendors: {
-        first: 'Burger King',
-        second: 'McDonald\'s',
-        third: 'Max',
+        first: { spot: 'Burger King', count: 23 },
+        second: { spot: 'McDonald\'s', count: 43 },
+        third: { spot: 'Max', count: 11 },
       },
       numberOfTransactionsAtTopVendor: 43,
       largestTransaction: {
