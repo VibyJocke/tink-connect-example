@@ -31,8 +31,8 @@ class Main extends React.Component {
   getData = async (code) => {
     const response = await fetch('/code', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({code: code}),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code }),
     });
 
     const body = await response.json();
@@ -45,11 +45,11 @@ class Main extends React.Component {
     const error = new URLSearchParams(this.props.location.search).get('error');
     const message = new URLSearchParams(this.props.location.search).get('message');
 
-    this.setState({code: code, error: error, errorMessage: message});
+    this.setState({ code: code, error: error, errorMessage: message });
 
     if (code) {
       this.getData(code)
-        .then(res => this.setState({data: res}))
+        .then(res => this.setState({ data: res }))
         .catch(err => console.log(err));
     }
   }
@@ -70,7 +70,7 @@ class Main extends React.Component {
       return (
         <div>
           <h4 className="pink">Account data</h4>
-          <div style={{margin: '30px'}}>
+          <div style={{ margin: '30px' }}>
             {accounts}
           </div>
         </div>
@@ -86,7 +86,7 @@ class Main extends React.Component {
       return (
         <div>
           <h4 className="pink">Investment data</h4>
-          <div style={{margin: '30px'}}>
+          <div style={{ margin: '30px' }}>
             <p>You don’t seem to have any investments.</p>
           </div>
         </div>
@@ -114,7 +114,7 @@ class Main extends React.Component {
       return (
         <div>
           <h4 className="pink">Investment data</h4>
-          <div style={{margin: '30px'}}>
+          <div style={{ margin: '30px' }}>
             {portfolios}
           </div>
         </div>
@@ -124,7 +124,7 @@ class Main extends React.Component {
 
   updateLargestTransaction(transaction) {
     if (!this.results.largestTransaction
-        || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
+      || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
       this.results.largestTransaction = transaction;
     }
   }
@@ -142,17 +142,17 @@ class Main extends React.Component {
 
   isNonBoringTransaction(transaction, category) {
     return category.type !== "INCOME"
-           && category.code !== "expenses:home.mortgage"
-           && category.code !== "expenses:home.rent"
-           && category.code !== "expenses:home.utilities"
-           && category.code !== "exponses:home.incurences-fees"
-           && category.code.indexOf("transfers:savings") === -1
-           && !transaction.description.match(/.*(save|spar).*/i);
+      && category.code !== "expenses:home.mortgage"
+      && category.code !== "expenses:home.rent"
+      && category.code !== "expenses:home.utilities"
+      && category.code !== "exponses:home.incurences-fees"
+      && category.code.indexOf("transfers:savings") === -1
+      && !transaction.description.match(/.*(save|spar).*/i);
   }
 
   isDrinkingRelatedTransaction(transaction, category) {
     return category.code === "exponses:food.bars"
-           || transaction.description.match(/.*(systembolaget).*/i);
+      || transaction.description.match(/.*(systembolaget).*/i);
   }
 
   updateTopCategory(transaction, category) {
@@ -166,14 +166,14 @@ class Main extends React.Component {
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
-        sortable.push([spot, this.topCategoryResult[spot]]);
+      sortable.push([spot, this.topCategoryResult[spot]]);
     }
 
-    sortable.sort(function(a, b) {
-        return b[1] - a[1];
+    sortable.sort(function (a, b) {
+      return b[1] - a[1];
     });
     for (var i = 0; sortable.length > 3 && i < 3; ++i) {
-      this.results.topCategory[this.indexToString(i)] = {category: sortable[i][0], count: sortable[i][1]};
+      this.results.topCategory[this.indexToString(i)] = { category: sortable[i][0], count: sortable[i][1] };
     }
   }
 
@@ -184,15 +184,15 @@ class Main extends React.Component {
 
     var sortable = [];
     for (var spot in this.topThreeResult) {
-        sortable.push([spot, this.topThreeResult[spot]]);
+      sortable.push([spot, this.topThreeResult[spot]]);
     }
 
-    sortable.sort(function(a, b) {
-        return b[1] - a[1];
+    sortable.sort(function (a, b) {
+      return b[1] - a[1];
     });
 
     for (var i = 0; sortable.length > 3 && i < 3; ++i) {
-       this.results.topThreeVendors[this.indexToString(i)] = {"spot": sortable[i][0], "count": sortable[i][1]};
+      this.results.topThreeVendors[this.indexToString(i)] = { "spot": sortable[i][0], "count": sortable[i][1] };
     }
   }
 
@@ -240,7 +240,7 @@ class Main extends React.Component {
       return (
         <div>
           <h4 className="pink">Some of your transactions</h4>
-          <div style={{margin: '30px'}}>
+          <div style={{ margin: '30px' }}>
             <p>You don’t seem to have any transactions.</p>
           </div>
         </div>
@@ -251,6 +251,7 @@ class Main extends React.Component {
       this.calculateStatistics(transactionData, categoryData);
       console.log(this.results);
       localStorage.setItem('result', JSON.stringify(this.results));
+      this.props.history.push('result-1')
     }
   }
 
@@ -259,43 +260,42 @@ class Main extends React.Component {
     const transactionList = this.getTransactionDataFromApiResponse(currency);
 
     if (transactionList) {
-      return (
-        <Row>
-          <Col lg={{size: 6, offset: 3}}>
-            {transactionList}
-          </Col>
-        </Row>
-      );
-    } else if (this.state.error) {
       return '';
-    } else {
-      return <Spinner width='50px' image={'./spinner.png'} />;
-    }
+    } else if (this.state.error) {
+      return (
+        <div className="grid-x grid-padding-x">
 
+          <div className="large-12 text-center cell">
+            <h3 style={{ paddingTop: '20px' }}>Failed to fetch you data 😞</h3>
+          </div>
+
+          <Button style={{ margin: '30px' }} href="/">Take me back</Button>
+
+        </div>
+      );
+    } else {
+      return (
+        <div className="grid-x grid-padding-x">
+
+          <div className="large-12 text-center cell">
+            <img alt="" src="hands.gif" width="500px" />
+          </div>
+
+          <div className="large-12 text-center cell">
+            <h1 style={{ opacity: '0.2' }}>Loading...</h1>
+            <h3 style={{ paddingTop: '20px' }}>Please wait a moment while we generate your results.</h3>
+          </div>
+
+        </div>
+      );
+    }
   }
 
   render() {
-
-    let header = '';
-
-    if (!this.state.error) {
-      header = <Header text="Your bank was successfully connected!" emoji="tada" />;
-    } else {
-      header = <Header text="Something went wrong" emoji="sad" />;
-    }
-    const content = this.getContent();
-
     return (
       <div>
-        {header}
-
-        {content}
-
-        <p style={{fontSize: '18px', paddingTop: '40px'}}>{this.state.errorMessage}</p>
-        <Button style={{margin: '30px'}} href="/">Take me back</Button>
-
+        {this.getContent()}
       </div>
-
     );
   }
 }
