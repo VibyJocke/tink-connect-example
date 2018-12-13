@@ -1,8 +1,10 @@
 import React from 'react';
 
-export default class Result1 extends React.Component {
+export default class Result7 extends React.Component {
   constructor(props) {
     super(props);
+
+    var result = JSON.parse(localStorage.getItem('result'))
 
     this.state = {
       topCategories: [{
