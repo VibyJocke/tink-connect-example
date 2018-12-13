@@ -20,6 +20,11 @@ class Main extends React.Component {
     transactionsPerMonth: {}
   };
 
+  monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
   topThreeResult = {};
   topCategoryResult = {};
 
@@ -117,24 +122,6 @@ class Main extends React.Component {
     }
   }
 
-  // getBiggestTransaction(transactionData, categoryData, currency) {
-  //   var biggestTransaction = {amount: 0};
-  //   for (var i = 0; i < transactionData.length; ++i) {
-  //     var transaction = transactionData[i].transaction;
-  //     var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
-  //     if (this.isNonBoringTransaction(transaction, transactionCategory)) {
-  //       if (biggestTransaction.amount === 0
-  //           || Math.abs(biggestTransaction.amount) < Math.abs(transaction.amount)) {
-  //         biggestTransaction = transaction
-  //       }
-  //     } else {
-  //       continue
-  //     }
-  //   }
-  //
-  //   return biggestTransaction;
-  // }
-
   updateLargestTransaction(transaction) {
     if (!this.results.largestTransaction
         || Math.abs(this.results.largestTransaction.amount) < Math.abs(transaction.amount)) {
@@ -146,13 +133,21 @@ class Main extends React.Component {
     return categoryData.find(category => category.id === transaction.categoryId);
   }
 
+  updateTransactionsPerMonth(transaction, category) {
+    var date = new Date(transaction.date);
+    this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] ?
+      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] += 1 :
+      this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] = 1;
+
+  }
+
   isNonBoringTransaction(transaction, category) {
     return category.type !== "INCOME"
            && category.code !== "expenses:home.mortgage"
            && category.code !== "expenses:home.rent"
            && category.code !== "expenses:home.utilities"
            && category.code !== "exponses:home.incurences-fees"
-           && category.code.indexOf("transfers:savings") !== -1
+           && category.code.indexOf("transfers:savings") === -1
            && !transaction.description.match(/.*(save|spar).*/i);
   }
 
@@ -163,7 +158,7 @@ class Main extends React.Component {
 
   updateTopCategory(transaction, category) {
     var code = category.code;
-    if (isDrinkingRelatedTransaction(transaction, category)) {
+    if (this.isDrinkingRelatedTransaction(transaction, category)) {
       code = "drinking";
     }
     this.topCategoryResult[code] ?
@@ -255,7 +250,6 @@ class Main extends React.Component {
       var transactionData = data.response.transactionData.results;
       this.calculateStatistics(transactionData, categoryData);
       console.log(this.results);
-      localStorage.setItem('result', JSON.stringify(this.results));
     }
   }
 
