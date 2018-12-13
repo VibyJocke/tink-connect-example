@@ -31,21 +31,21 @@ export default class Result1 extends React.Component {
 
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
-                <img src={this.state.topCategories[0].img} />
+                <img alt="" src={this.state.topCategories[0].img} />
                 <h3 style={{ paddingTop: '30px' }}>{this.state.topCategories[0].name}</h3>
               </div></a>
             </div>
 
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
-                <img src={this.state.topCategories[1].img} />
+                <img alt="" src={this.state.topCategories[1].img} />
                 <h3 style={{ paddingTop: '30px' }}>{this.state.topCategories[1].name}</h3>
               </div></a>
             </div>
 
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
-                <img src={this.state.topCategories[2].img} />
+                <img alt="" src={this.state.topCategories[2].img} />
                 <h3 style={{ paddingTop: '30px' }}>{this.state.topCategories[2].name}</h3>
               </div></a>
             </div>

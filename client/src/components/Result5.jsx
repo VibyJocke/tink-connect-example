@@ -27,7 +27,7 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-4 large-offset-2 cell" style={{ marginTop: '- 100px' }}>
-              <img src="hands.png" />
+              <img alt="" src="hands.png" />
             </div>
 
             <div className="large-6 cell">

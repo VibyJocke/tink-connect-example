@@ -21,51 +21,51 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar1.svg" />
+              <img alt="" src="bar1.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar2.svg" />
+              <img alt="" src="bar2.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar3.svg" />
+              <img alt="" src="bar3.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar4.svg" />
+              <img alt="" src="bar4.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar6.svg" />
+              <img alt="" src="bar6.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar6.svg" />
+              <img alt="" src="bar6.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar7.svg" />
+              <img alt="" src="bar7.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar8.svg" />
+              <img alt="" src="bar8.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar9.svg" />
+              <img alt="" src="bar9.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar10.svg" />
+              <img alt="" src="bar10.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar11.svg" />
+              <img alt="" src="bar11.svg" />
             </div>
 
             <div className="large-1 align-self-bottom cell">
-              <img src="bar12.svg" />
+              <img alt="" src="bar12.svg" />
             </div>
 
 
