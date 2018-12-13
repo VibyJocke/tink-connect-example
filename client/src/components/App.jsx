@@ -10,6 +10,7 @@ import Result4 from './Result4';
 import Result5 from './Result5';
 import Result6 from './Result6';
 import Result7 from './Result7';
+import Result8 from './Result8';
 
 const App = () => (
   <Container>
@@ -23,6 +24,7 @@ const App = () => (
       <Route exact path="/result-5" component={Result5} />
       <Route exact path="/result-6" component={Result6} />
       <Route exact path="/result-7" component={Result7} />
+      <Route exact path="/result-8" component={Result8} />
     </Switch>
   </Container>
 );
