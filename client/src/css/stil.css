@@ -37,11 +37,113 @@
   background-image: linear-gradient(-180deg, #FEE8E1 0%, #FBD8CC 100%);
 }
 
+.section-result6 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #FBD8CC 0%, #FAAD94 100%);
+}
+
+.section-result7 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: linear-gradient(-180deg, #FAAD94 0%, #F89572 100%);
+}
+
+.section-result8-restaurants {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/restaurants.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-shopping {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/shopping.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-transport {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/transport.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-beauty {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/beauty.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-leisure {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/leisure.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-home {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/home.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result8-property {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-image: url("../img/property.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result9 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-color: #00343C;
+  background-image: url("../img/alcohol.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section-result10 {
+  padding: 150px 0px 0px 0px;
+  height: 100vh;
+  background-color: #00343C;
+  background-image: url("../img/moreorless.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .card-dark {
   background: #2D5D67;
   box-shadow: 0 8px 18px 0 rgba(0,0,0,0.06);
   padding: 50px 40px 30px 40px;
   border-radius: 6px;
+}
+
+.card-light {
+  margin: 30px 0px 0px 0px;
+  padding: 60px 40px 60px 40px;
+  border-radius: 6px;
+  background: #FAB49C;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.04);
+}
+
+.card-light:hover {
+  margin: 30px 0px 0px 0px;
+  padding: 60px 40px 60px 40px;
+  border-radius: 12px;
+  background: #F3A78C;
+  box-shadow: 0 12px 32px 0 rgba(0,0,0,0.16);
 }
 
 .distance {

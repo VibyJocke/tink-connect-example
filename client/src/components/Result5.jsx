@@ -32,7 +32,7 @@ export default class Result1 extends React.Component {
             </div>
 
             <div className="large-6 cell">
-              <a class="button secondary large" href="result-5">Continue</a>
+              <a class="button secondary large" href="result-6">Continue</a>
             </div>
 
           </div>
