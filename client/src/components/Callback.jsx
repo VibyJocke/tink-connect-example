@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Col, Row } from 'reactstrap';
-import Header from './Header';
 import { formatDate, formatNumber } from '../utils/Format';
-import Spinner from './Spinner';
 
 class Main extends React.Component {
   state = {
