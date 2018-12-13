@@ -4,8 +4,10 @@ export default class Result1 extends React.Component {
   constructor(props) {
     super(props);
 
+    var results = JSON.parse(localStorage.getItem('result'));
+
     this.state = {
-      largestTransaction: 75349
+      largestTransaction: results.largestTransaction.amount
     };
   }
 
@@ -22,7 +24,7 @@ export default class Result1 extends React.Component {
 
             <div className="large-12 distance cell">
               <h1 style={{fontSize: '17rem'}}>{this.state.largestTransaction}</h1>
-              <p>You did purchase something really expensive. Nice. It’s quality over quantity.</p>
+              <p>You purchased something really expensive. Nice. It’s quality over quantity.</p>
               <a className="button large" href="result-3">Continue</a>
             </div>
 

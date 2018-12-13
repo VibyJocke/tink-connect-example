@@ -7,7 +7,11 @@ export default class Main extends React.Component {
 
     var staticResult = {
       topThreeVendors: [{}],
-      largestTransaction: {},
+      largestTransaction: {
+        amount: 75349,
+        category: 'Transport',
+        name: 'Stockholm Bilhandel'
+      },
       numberOfTransactions: 4123,
       topCategory: {},
       transactionsPerMonth: {},

@@ -28,7 +28,7 @@ export default class Result1 extends React.Component {
 
             <div className="large-6 distance cell">
               <h1 style={{ fontSize: '17rem' }}>{this.state.numTransactions}</h1>
-              <p>The amount of transactions you made during {new Date().getFullYear()}. That’s an average of <strong>{(this.state.numTransactions / 365).toFixed(1)} per day</strong>. Impressive!</p>
+              <p>The number of transactions you made during {new Date().getFullYear()}. That’s an average of <strong>{(this.state.numTransactions / 365).toFixed(1)} per day</strong>. Impressive!</p>
               <a className="button large" href="result-2">Continue</a>
             </div>
 
