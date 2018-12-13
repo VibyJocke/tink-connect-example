@@ -133,12 +133,11 @@ class Main extends React.Component {
     return categoryData.find(category => category.id === transaction.categoryId);
   }
 
-  updateTransactionsPerMonth(transaction, category) {
+  updateTransactionsPerMonth(transaction) {
     var date = new Date(transaction.date);
     this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] ?
       this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] += 1 :
       this.results.transactionsPerMonth[this.monthNames[date.getMonth()]] = 1;
-
   }
 
   isNonBoringTransaction(transaction, category) {
@@ -157,13 +156,13 @@ class Main extends React.Component {
   }
 
   updateTopCategory(transaction, category) {
-    var code = category.code;
+    var categoryName = category.primaryName;
     if (this.isDrinkingRelatedTransaction(transaction, category)) {
-      code = "drinking";
+      categoryName = "Drinking";
     }
-    this.topCategoryResult[code] ?
-      this.topCategoryResult[code] += 1
-      : this.topCategoryResult[code] = 1;
+    this.topCategoryResult[categoryName] ?
+      this.topCategoryResult[categoryName] += 1
+      : this.topCategoryResult[categoryName] = 1;
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
@@ -173,8 +172,8 @@ class Main extends React.Component {
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
-    if (sortable.length > 0) {
-      this.results.topCategory = {category: sortable[0][0], count: sortable[0][1]}
+    for (var i = 0; sortable.length > 3 && i < 3; ++i) {
+      this.results.topCategory[this.indexToString(i)] = {category: sortable[i][0], count: sortable[i][1]};
     }
   }
 
@@ -220,6 +219,7 @@ class Main extends React.Component {
         this.updateTotalSpend(transaction);
         this.updateTopCategory(transaction, transactionCategory);
         this.updateNumberOfTransactions();
+        this.updateTransactionsPerMonth(transaction);
       }
     }
   }
