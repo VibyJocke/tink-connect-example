@@ -16,7 +16,10 @@ class Main extends React.Component {
     totalSpend: 0,
     topCategory: {},
     transactionsPerMonth: {},
-    alcoholSpend: 0
+    alcoholSpend: 0,
+    savings: 0,
+    accountBalance: 0,
+    youVsAverageSwede: {}
   };
 
   monthNames = [
@@ -26,6 +29,7 @@ class Main extends React.Component {
 
   topThreeResult = {};
   topCategoryResult = {};
+  topSubCategoryResult = {};
 
   getData = async (code) => {
     const response = await fetch('/code', {
@@ -53,27 +57,18 @@ class Main extends React.Component {
     }
   }
 
-  getAccountsListFromApiResponse(currency) {
+  updateTotalAccountBalance(account) {
+    if (account.type !== "LOAN") {
+      this.results.accountBalance += account.balance;
+    }
+  }
+
+  getAccountsListFromApiResponse() {
     const data = this.state.data;
     if (!data || !data.response || !data.response.accountData || !data.response.accountData.accounts) {
       return undefined;
     } else {
-      const accounts = data.response.accountData.accounts.map(account => {
-        return (
-          <p key={account.id}><b>{account.name}</b><br />
-            {formatNumber(account.balance)} {currency}
-          </p>
-        );
-      });
-
-      return (
-        <div>
-          <h4 className="pink">Account data</h4>
-          <div style={{ margin: '30px' }}>
-            {accounts}
-          </div>
-        </div>
-      );
+      data.response.accountData.accounts.map(account => this.updateTotalAccountBalance(account));
     }
   }
 
@@ -150,6 +145,17 @@ class Main extends React.Component {
       && !transaction.description.match(/.*(save|spar).*/i);
   }
 
+  isSavings(transaction, category) {
+    return category.code.indexOf("transfers:savings") !== -1
+           || transaction.description.match(/.*(save|spar).*/i);
+  }
+
+  updateSavings(transaction, category) {
+    if (this.isSavings(transaction, category)) {
+      this.results.savings += Math.abs(transaction.amount);
+    }
+  }
+
   isExpense(transaction, category) {
     return category.type !== "EXPENSE";
   }
@@ -162,15 +168,24 @@ class Main extends React.Component {
   updateTopCategory(transaction, category) {
     var transactionAmount = Math.abs(transaction.amount);
     var categoryName = category.primaryName;
+    var subCategoryName = category.secondaryName;
     if (this.isDrinkingRelatedTransaction(transaction, category)) {
-      categoryName = "Drinking";
+      this.topCategoryResult["Drinking"] ?
+        this.topCategoryResult["Drinking"] += transactionAmount
+        : this.topCategoryResult["Drinking"] = transactionAmount;
     }
     if (categoryName === 'Home Improvements' || categoryName === 'Household & Services') {
-        categoryName = 'Home'
+      this.topCategoryResult["Home"] ?
+        this.topCategoryResult["Home"] += transactionAmount
+        : this.topCategoryResult["Home"] = transactionAmount;
     }
     if (categoryName === 'Other') {
         return;
     }
+
+    this.topSubCategoryResult[subCategoryName] ?
+      this.topSubCategoryResult[subCategoryName] += transactionAmount
+      : this.topSubCategoryResult[subCategoryName] = transactionAmount;
 
     this.topCategoryResult[categoryName] ?
       this.topCategoryResult[categoryName] += transactionAmount
@@ -239,7 +254,17 @@ class Main extends React.Component {
       if (this.isExpense(transaction, transactionCategory)) {
         this.updateSpendingPerMonth(transaction);
       }
+      this.updateSavings(transaction, transactionCategory);
     }
+    this.setYouVsAvgSwede();
+  }
+
+  setYouVsAvgSwede() {
+    this.results.youVsAverageSwede["Restaurants & Café"] = this.topSubCategoryResult["Restaurants"] + this.topSubCategoryResult["Coffee & Snacks"];
+    this.results.youVsAverageSwede["Vacation"] = this.topSubCategoryResult["Vacation"];
+    this.results.youVsAverageSwede["Sports & Fitness"] = this.topSubCategoryResult["Sports & Fitness"];
+    this.results.youVsAverageSwede["Culture & Events"] = this.topSubCategoryResult["Culture & Events"];
+    console.log(this.results.youVsAverageSwede);
   }
 
   updateNumberOfTransactions() {
@@ -267,9 +292,16 @@ class Main extends React.Component {
       var categoryData = data.response.categoryData;
       var transactionData = data.response.transactionData.results;
       this.calculateStatistics(transactionData, categoryData);
-      localStorage.setItem('result', JSON.stringify(this.results));
-      this.props.history.push('result-1')
     }
+    // Something makes me have to put this here, dunno what.
+    this.getAccountsListFromApiResponse();
+    this.saveAndRedirect();
+  }
+
+  saveAndRedirect() {
+    console.log(this.results);
+    localStorage.setItem('result', JSON.stringify(this.results));
+    this.props.history.push('result-1')
   }
 
   getContent() {

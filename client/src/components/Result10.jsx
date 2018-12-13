@@ -15,9 +15,13 @@ export default class Result10 extends React.Component {
   render() {
   const alcoholAvg = 3804;
   const alcoholSpend = this.state.alcoholSpend;
-  var messageTitle = alcoholSpend > alcoholAvg ? "You spend MORE!" : "You spend LESS!";
-  var messageBody = alcoholSpend > alcoholAvg ? "Seems like you enjoy socializing in bars more than the average Swede, cool!"
-    : "Seems like you fancy something else to drink compared to the average Swede, coolio!";
+  var messageTitle = "You spend " + alcoholSpend > alcoholAvg ? "MORE!" : "LESS!";
+  var messageBody =
+    "Seems like you "
+    + (alcoholSpend > alcoholAvg
+    ? "enjoy socializing in bars more than"
+    : "fancy something else to drink compared to")
+    + " the average Swede, cool!";
 
     return (
       <div className="section-result10">
