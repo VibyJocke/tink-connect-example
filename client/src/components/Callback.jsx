@@ -17,8 +17,7 @@ class Main extends React.Component {
     numberOfTransactions: 0,
     totalSpend: 0,
     topCategory: {},
-    transactionsPerMonth: {},
-    spendVsAveragePopulation: {}
+    transactionsPerMonth: {}
   };
 
   topThreeResult = {};
@@ -153,6 +152,7 @@ class Main extends React.Component {
            && category.code !== "expenses:home.rent"
            && category.code !== "expenses:home.utilities"
            && category.code !== "exponses:home.incurences-fees"
+           && category.code.indexOf("transfers:savings") !== -1
            && !transaction.description.match(/.*(save|spar).*/i);
   }
 
@@ -161,25 +161,14 @@ class Main extends React.Component {
            || transaction.description.match(/.*(systembolaget).*/i);
   }
 
-  getDrinkingSpending(transactionData, categoryData) {
-    var amount = 0;
-    var count = 0;
-    for (var i = 0; i < transactionData.length; ++i) {
-      var transaction = transactionData[i].transaction;
-      var transactionCategory = this.getCategoryForTransaction(transaction, categoryData);
-      if (this.isDrinkingRelatedTransaction(transaction, transactionCategory)) {
-        //this.results. += Math.abs(transaction.amount);
-        count++;
-      }
-    }
-    console.log("Count: " + count);
-    return amount;
-  }
-
   updateTopCategory(transaction, category) {
-    this.topCategoryResult[category.code] ?
-      this.topCategoryResult[category.code] += 1
-      : this.topCategoryResult[category.code] = 1;
+    var code = category.code;
+    if (isDrinkingRelatedTransaction(transaction, category)) {
+      code = "drinking";
+    }
+    this.topCategoryResult[code] ?
+      this.topCategoryResult[code] += 1
+      : this.topCategoryResult[code] = 1;
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
@@ -236,9 +225,6 @@ class Main extends React.Component {
         this.updateTotalSpend(transaction);
         this.updateTopCategory(transaction, transactionCategory);
         this.updateNumberOfTransactions();
-      }
-      if (this.isDrinkingRelatedTransaction(transaction, transactionCategory)) {
-        //this.updateDrinkingSpend(transaction);
       }
     }
   }
