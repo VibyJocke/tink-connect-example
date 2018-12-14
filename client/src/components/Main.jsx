@@ -6,25 +6,6 @@ export default class Main extends React.Component {
   constructor(props) {
     super(props);
 
-    var staticResult = {
-      topThreeVendors: {
-        first: { spot: 'Burger King', count: 23 },
-        second: { spot: 'McDonald\'s', count: 43 },
-        third: { spot: 'Max', count: 11 },
-      },
-      numberOfTransactionsAtTopVendor: 43,
-      largestTransaction: {
-        amount: 75349,
-        category: 'Transport',
-        name: 'Stockholm Bilhandel'
-      },
-      numberOfTransactions: 4123,
-      topCategory: {},
-      transactionsPerMonth: {},
-    }
-
-    localStorage.setItem('result', JSON.stringify(staticResult));
-
     this.state = {
       market: 'SE',
       locale: 'en_US',
