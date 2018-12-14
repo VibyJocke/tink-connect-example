@@ -111,8 +111,7 @@ async function getTransactionData(token) {
     },
     body: JSON.stringify({
       limit: 10000,
-      endDate: new Date(),
-      startDate: new Date().setFullYear(new Date().getFullYear() -1),
+      startDate: new Date(new Date().getFullYear(), 0, 1).getMilliseconds(),
       sort: "DATE"
     }),
   });

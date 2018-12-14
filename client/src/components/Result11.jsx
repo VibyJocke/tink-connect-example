@@ -17,7 +17,7 @@ export default class Result11 extends React.Component {
             <div className="large-12 cell">
               <h1 style={{color: '#F9BFAC'}}>You & Charlie Sheen</h1>
               <h3 style={{paddingTop: '20px'}}>
-                Charlie Sheen knows how to throw a party. Can you keep up with his festive spending? So you know, Charlie Sheen is known to have trashed a luxury hotel room, paid ex-porn stars to attend and then give away convertible Bentleys to attendees. This was a Monday.
+                Charlie Sheen knows how to throw a party. So you know, Charlie Sheen is known to have trashed a luxury hotel room, paid ex-porn stars to attend and then give away convertible Bentleys to attendees. <br />This was a Monday.
               </h3>
               <h3>
                 Do you think you could afford to split the bill with Charlie for a night of partying?

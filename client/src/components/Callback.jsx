@@ -173,6 +173,7 @@ class Main extends React.Component {
       this.topCategoryResult["Drinking"] ?
         this.topCategoryResult["Drinking"] += transactionAmount
         : this.topCategoryResult["Drinking"] = transactionAmount;
+        this.results.alcoholSpend = this.topCategoryResult["Drinking"];
     }
     if (categoryName === 'Home Improvements' || categoryName === 'Household & Services') {
       this.topCategoryResult["Home"] ?
@@ -190,10 +191,6 @@ class Main extends React.Component {
     this.topCategoryResult[categoryName] ?
       this.topCategoryResult[categoryName] += transactionAmount
       : this.topCategoryResult[categoryName] = transactionAmount;
-
-     if (categoryName === 'Drinking') {
-        this.results.alcoholSpend = this.topCategoryResult[categoryName];
-     }
 
     var sortable = [];
     for (var spot in this.topCategoryResult) {
