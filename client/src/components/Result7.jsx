@@ -74,21 +74,21 @@ export default class Result7 extends React.Component {
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
                 <img alt="" src={this.state.randomizedCategories[0].img} />
-                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[0].name}</h3>
+                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[0].category}</h3>
               </div></a>
             </div>
 
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
                 <img alt="" src={this.state.randomizedCategories[1].img} />
-                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[1].name}</h3>
+                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[1].category}</h3>
               </div></a>
             </div>
 
             <div className="large-4 text-center cell"><a href="result-8" style={{ color: '#fff' }}>
               <div className="card-light">
                 <img alt="" src={this.state.randomizedCategories[2].img} />
-                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[2].name}</h3>
+                <h3 style={{ paddingTop: '30px' }}>{this.state.randomizedCategories[2].category}</h3>
               </div></a>
             </div>
 
