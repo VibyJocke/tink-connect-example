@@ -12,6 +12,10 @@ export default class Result12Opts extends React.Component {
     };
   }
 
+  prettyPrintNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   render() {
     var numYous = Math.floor(987596680000 / this.state.accountBalance);
 
@@ -28,8 +32,8 @@ export default class Result12Opts extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <a className="button large hollow" href="result-12-res">{Math.floor(numYous / 1000) * 1000}</a>
-              <a className="button large hollow" style={{ marginLeft: '50px' }} href="result-12-res">{Math.floor((numYous * 1.32) / 1000) * 1000}</a>
+              <a className="button large hollow" href="result-12-res">{this.prettyPrintNumber(Math.floor(numYous / 1000) * 1000)}</a>
+              <a className="button large hollow" style={{ marginLeft: '50px' }} href="result-12-res">{this.prettyPrintNumber(Math.floor((numYous * 1.32) / 1000) * 1000)}</a>
             </div>
 
           </div>

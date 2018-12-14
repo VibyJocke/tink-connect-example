@@ -12,7 +12,7 @@ export default class Result11Result extends React.Component {
     };
   }
 
-  numberWithCommas(x) {
+  prettyPrintNumber(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   }
 
@@ -37,7 +37,7 @@ export default class Result11Result extends React.Component {
               </div>
               }
               <h3>He can spend 2 355 000 kr on a decent night of partying.</h3>
-              <h3>(Because you have a total worth of {this.numberWithCommas(Math.floor(this.state.accountBalance))} kr)</h3>
+              <h3>(Because you have a total worth of {this.prettyPrintNumber(Math.floor(this.state.accountBalance))} kr)</h3>
             </div>
 
             <div className="large-12 distance cell">

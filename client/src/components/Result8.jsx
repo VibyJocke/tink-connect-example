@@ -14,6 +14,10 @@ export default class Result8 extends React.Component {
     };
   }
 
+  prettyPrintNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   getClass(name) {
     if(name === 'Health & Beauty') return 'beauty'
     else if(name === 'Home') return 'home'
@@ -37,7 +41,7 @@ export default class Result8 extends React.Component {
 
             <div className="large-12 distance cell">
               <h2>{this.state.name}, where you spent</h2>
-              <h1 style={{ fontSize: '19rem' }}>{this.state.amount} kr</h1>
+              <h1 style={{ fontSize: '19rem' }}>{this.prettyPrintNumber(this.state.amount)} kr</h1>
             </div>
 
             <div className="large-12 text-right cell">
