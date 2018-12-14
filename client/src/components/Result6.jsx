@@ -45,7 +45,7 @@ export default class Result6 extends React.Component {
   }
 
   normalize(num) {
-    return ((num - this.state.min) / (this.state.max - this.state.min)) * 500;
+    return ((num - this.state.min) / (this.state.max - this.state.min)) * 450;
   }
 
   render() {
