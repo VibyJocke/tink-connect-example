@@ -140,8 +140,8 @@ class Main extends React.Component {
       && category.code !== "expenses:home.mortgage"
       && category.code !== "expenses:home.rent"
       && category.code !== "expenses:home.utilities"
-      && category.code !== "exponses:home.incurences-fees"
-      && category.code.indexOf("transfers") === -1
+      && category.code !== "expenses:home.incurences-fees"
+      && category.code.indexOf("transfer") === -1
       && !transaction.description.match(/.*(save|spar).*/i)
       && !transaction.description.match(/.*(avanza).*/i); //For some reason avanza expenses are categorized as food & drinks
   }
@@ -162,7 +162,7 @@ class Main extends React.Component {
   }
 
   isDrinkingRelatedTransaction(transaction, category) {
-    return category.code === "exponses:food.bars"
+    return category.code === "expenses:food.bars"
       || transaction.description.match(/.*(systembolaget).*/i);
   }
 
