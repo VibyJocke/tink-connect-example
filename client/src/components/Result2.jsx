@@ -34,7 +34,7 @@ export default class Result2 extends React.Component {
             <div className="large-8 distance cell">
               <h1 style={{fontSize: '14rem'}}>{largestPurchase} kr</h1>
               <p>You did purchase something really expensive. Nice. It’s quality over quantity.</p>
-              <a className="button large" href="result-3.html">Continue</a>
+              <a className="button large" href="result-3">Continue</a>
             </div>
 
             <div className="large-4 distance3 cell">
