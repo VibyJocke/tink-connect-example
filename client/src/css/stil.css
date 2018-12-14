@@ -190,3 +190,12 @@
 .distance3 {
  padding: 370px 0px 0px 0px;
 }
+
+.section-result-end {
+ padding: 150px 0px 0px 0px;
+ height: 100vh;
+ background-color: #00343C;
+ background-image: url("../img/2018.jpg");
+ background-repeat: no-repeat;
+ background-size: cover;
+}

@@ -128,7 +128,7 @@ export default class Result12Result extends React.Component {
 
 
             <div className="large-12 text-right cell">
-              <a className="button large" href="#">Continue</a>
+              <a className="button large" href="end">Continue</a>
             </div>
 
           </div>
