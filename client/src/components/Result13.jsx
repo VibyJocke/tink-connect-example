@@ -52,7 +52,7 @@ export default class Result12Result extends React.Component {
   }
 
   normalize(num) {
-    return ((num - this.state.min) / (this.state.max - this.state.min)) * 250;
+    return (((num - this.state.min) / (this.state.max - this.state.min)) * 250) + 5;
   }
 
   render() {
