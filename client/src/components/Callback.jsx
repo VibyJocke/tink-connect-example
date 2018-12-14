@@ -142,7 +142,8 @@ class Main extends React.Component {
       && category.code !== "expenses:home.utilities"
       && category.code !== "exponses:home.incurences-fees"
       && category.code.indexOf("transfers") === -1
-      && !transaction.description.match(/.*(save|spar).*/i);
+      && !transaction.description.match(/.*(save|spar).*/i)
+      && !transaction.description.match(/.*(avanza).*/i); //For some reason avanza expenses are categorized as food & drinks
   }
 
   isSavings(transaction, category) {
