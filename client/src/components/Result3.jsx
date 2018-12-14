@@ -7,7 +7,7 @@ export default class Result3 extends React.Component {
     var vendors = JSON.parse(localStorage.getItem('result')).topThreeVendors;
 
     this.state = {
-      topVendors: [vendors.second.spot, vendors.first.spot, vendors.third.spot]
+      topVendors: [vendors.first.spot, vendors.second.spot, vendors.third.spot]
     };
   }
 
@@ -27,7 +27,7 @@ export default class Result3 extends React.Component {
               <div className="card-dark text-center">
                 <img src="2.png" alt="" style={{ paddingBottom: '40px' }} />
                 <h4>{this.state.topVendors[1]}</h4>
-                <p>This was your second favorite place to purchase.</p>
+                <p>This was your second favorite place.</p>
               </div>
 
             </div>
@@ -47,7 +47,7 @@ export default class Result3 extends React.Component {
               <div className="card-dark text-center">
                 <img src="3.png" alt="" style={{ paddingBottom: '40px' }} />
                 <h4>{this.state.topVendors[2]}</h4>
-                <p>This was your second favorite place to purchase.</p>
+                <p>This was your third favorite place.</p>
               </div>
 
             </div>
