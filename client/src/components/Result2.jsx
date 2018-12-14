@@ -19,27 +19,32 @@ export default class Result2 extends React.Component {
   }
 
   render() {
+    var transaction = this.state.transaction;
+    var date = new Date(transaction.originalDate).toUTCString().replace(" 11:00:00 GMT", "");
+    var largestPurchase = this.prettyPrintNumber(Math.floor(this.state.largestTransaction));
     return (
       <div className="section-result2">
-
         <div className="grid-container">
           <div className="grid-x grid-padding-x">
 
             <div className="large-12 cell">
-              <h1 style={{opacity: '0.2'}}>Highest transaction</h1>
+              <h1 style={{ opacity: '0.2' }}>Highest transaction</h1>
             </div>
 
-            <div className="large-12 distance cell">
-              <h1 style={{fontSize: '17rem'}}>
-                {this.prettyPrintNumber(Math.floor(this.state.largestTransaction))} SEK
-              </h1>
-              <p>You purchased something really expensive. Nice. It’s quality over quantity.</p>
-              <a className="button large" href="result-3">Continue</a>
+            <div className="large-8 distance cell">
+              <h1 style={{fontSize: '14rem'}}>{largestPurchase} kr</h1>
+              <p>You did purchase something really expensive. Nice. It’s quality over quantity.</p>
+              <a className="button large" href="result-3.html">Continue</a>
+            </div>
+
+            <div className="large-4 distance3 cell">
+              <div className="card-dark">
+                <p>You made the purchase of <strong>{largestPurchase} kr</strong> at <strong>{transaction.formattedDescription}</strong> at <strong>{date}</strong>.</p>
+              </div>
             </div>
 
           </div>
         </div>
-
       </div>
     );
   }
