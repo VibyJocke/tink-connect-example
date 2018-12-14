@@ -35,7 +35,7 @@ export default class End extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <a className="button large" href="result-1.html">Restart</a>
+              <a className="button large" href="/">Restart</a>
             </div>
 
           </div>
