@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Result11 extends React.Component {
+export default class Result11Opts extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,8 +25,8 @@ export default class Result11 extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <a className="button large hollow" href="result-12">Yes</a>
-              <a className="button large hollow" style={{marginLeft: '50px'}} href="result-12">No</a>
+              <a className="button large hollow" href="result-11-res">Yes</a>
+              <a className="button large hollow" style={{marginLeft: '50px'}} href="result-11-res">No</a>
             </div>
 
           </div>

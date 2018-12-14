@@ -36,7 +36,7 @@ export default class Result10 extends React.Component {
 
             <div className="large-12 distance cell">
               <h1>{Math.floor(this.state.alcoholSpend)} kr on alcohol</h1>
-              <a className="button large" href="result-11">Continue</a>
+              <a className="button large" href="result-11-opts">Continue</a>
             </div>
 
           </div>
