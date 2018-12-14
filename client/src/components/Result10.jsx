@@ -8,20 +8,24 @@ export default class Result10 extends React.Component {
     console.log(results)
 
     this.state = {
-        alcoholSpend: results.alcoholSpend
+      alcoholSpend: results.alcoholSpend
     };
   }
 
+  prettyPrintNumber(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
   render() {
-  const alcoholAvg = 3804;
-  const alcoholSpend = this.state.alcoholSpend;
-  var messageTitle = "You spend " + alcoholSpend > alcoholAvg ? "MORE!" : "LESS!";
-  var messageBody =
-    "Seems like you "
-    + (alcoholSpend > alcoholAvg
-    ? "enjoy socializing in bars more than"
-    : "fancy something else to drink compared to")
-    + " the average Swede, cool!";
+    const alcoholAvg = 3804;
+    const alcoholSpend = this.state.alcoholSpend;
+    var messageTitle = "You spend " + alcoholSpend > alcoholAvg ? "MORE!" : "LESS!";
+    var messageBody =
+      "Seems like you "
+      + (alcoholSpend > alcoholAvg
+        ? "enjoy socializing in bars more than"
+        : "fancy something else to drink compared to")
+      + " the average Swede, cool!";
 
     return (
       <div className="section-result10">
@@ -35,7 +39,7 @@ export default class Result10 extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <h1>{Math.floor(this.state.alcoholSpend)} kr on alcohol</h1>
+              <h1>{this.prettyPrintNumber(Math.floor(this.state.alcoholSpend))} kr on alcohol</h1>
               <a className="button large" href="result-11-opts">Continue</a>
             </div>
 

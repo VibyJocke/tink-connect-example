@@ -59,7 +59,6 @@ export default class Result12Result extends React.Component {
             </div>
 
 
-
             <div className="large-1 text-center large-offset-1 align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
                 <svg height={vacay} viewBox={"0 0 40 " + vacay} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + vacay + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
@@ -75,7 +74,6 @@ export default class Result12Result extends React.Component {
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
               <h5>{this.prettyPrintNumber(sweVacay * 60)} kr</h5>
             </div>
-
 
 
             <div className="large-1 text-center  large-offset-1 align-self-bottom cell">
@@ -95,7 +93,6 @@ export default class Result12Result extends React.Component {
             </div>
 
 
-
             <div className="large-1 text-center  large-offset-1 align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
                 <svg height={culture} viewBox={"0 0 40 " + culture} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + culture + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
@@ -111,7 +108,6 @@ export default class Result12Result extends React.Component {
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
               <h5>{this.prettyPrintNumber(sweCulture * 60)} kr</h5>
             </div>
-
 
 
             <div className="large-2 text-center cell">

@@ -15,8 +15,8 @@ export default class Result11Opts extends React.Component {
           <div className="grid-x grid-padding-x">
 
             <div className="large-12 cell">
-              <h1 style={{color: '#F9BFAC'}}>You & Charlie Sheen</h1>
-              <h3 style={{paddingTop: '20px'}}>
+              <h1 style={{ color: '#F9BFAC' }}>You & Charlie Sheen</h1>
+              <h3 style={{ paddingTop: '20px' }}>
                 Charlie Sheen knows how to throw a party. So you know, Charlie Sheen is known to have trashed a luxury hotel room, paid ex-porn stars to attend and then give away convertible Bentleys to attendees. <br />This was a Monday.
               </h3>
               <h3>
@@ -26,7 +26,7 @@ export default class Result11Opts extends React.Component {
 
             <div className="large-12 distance cell">
               <a className="button large hollow" href="result-11-res">Yes</a>
-              <a className="button large hollow" style={{marginLeft: '50px'}} href="result-11-res">No</a>
+              <a className="button large hollow" style={{ marginLeft: '50px' }} href="result-11-res">No</a>
             </div>
 
           </div>
