@@ -9,7 +9,8 @@ export default class Result2 extends React.Component {
     console.log(results);
 
     this.state = {
-      largestTransaction: Math.abs(results.largestTransaction.amount)
+      largestTransaction: Math.abs(results.largestTransaction.amount),
+      transaction: results.largestTransaction,
     };
   }
 
@@ -29,7 +30,9 @@ export default class Result2 extends React.Component {
             </div>
 
             <div className="large-12 distance cell">
-              <h1 style={{fontSize: '17rem'}}>{this.prettyPrintNumber(Math.floor(this.state.largestTransaction))} kr</h1>
+              <h1 style={{fontSize: '17rem'}}>
+                {this.prettyPrintNumber(Math.floor(this.state.largestTransaction))} SEK
+              </h1>
               <p>You purchased something really expensive. Nice. It’s quality over quantity.</p>
               <a className="button large" href="result-3">Continue</a>
             </div>
