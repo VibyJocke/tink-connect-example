@@ -10,25 +10,42 @@ export default class Result6 extends React.Component {
     const noData = 5;
 
     this.state = {
+        min: 5,
+        max: 5,
         months: [
-            result['January'] ? this.normalize(result['January']) : noData,
-            result['February'] ? this.normalize(result['February']) : noData,
-            result['Mars'] ? this.normalize(result['Mars']) : noData,
-            result['April'] ? this.normalize(result['April']) : noData,
-            result['May'] ? this.normalize(result['May']) : noData,
-            result['June'] ? this.normalize(result['June']) : noData,
-            result['July'] ? this.normalize(result['July']) : noData,
-            result['August'] ? this.normalize(result['August']) : noData,
-            result['September'] ? this.normalize(result['September']) : noData,
-            result['October'] ? this.normalize(result['October']) : noData,
-            result['November'] ? this.normalize(result['November']) : noData,
-            result['December'] ? this.normalize(result['December']) : noData,
+            result['January'] ? result['January'] : noData,
+            result['February'] ? result['February'] : noData,
+            result['Mars'] ? result['Mars'] : noData,
+            result['April'] ? result['April'] : noData,
+            result['May'] ? result['May'] : noData,
+            result['June'] ? result['June'] : noData,
+            result['July'] ? result['July'] : noData,
+            result['August'] ? result['August'] : noData,
+            result['September'] ? result['September'] : noData,
+            result['October'] ? result['October'] : noData,
+            result['November'] ? result['November'] : noData,
+            result['December'] ? result['December'] : noData,
         ]
     };
+    this.findMinMax();
+    console.log(this.state);
+    this.normalizeMonths();
+    console.log(this.state);
+  }
+
+  findMinMax() {
+    this.state.max = Math.max(...this.state.months);
+    this.state.min = Math.min(...this.state.months);
+  }
+
+  normalizeMonths() {
+    for (var i = 0; i < this.state.months.length; i++) {
+      this.state.months[i] = this.normalize(this.state.months[i]);
+    }
   }
 
   normalize(num) {
-    return num / 250; //TODO make a less naive normalizer
+    return ((num - this.state.min) / (this.state.max - this.state.min)) * 500;
   }
 
   render() {
