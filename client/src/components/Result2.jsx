@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 
 export default class Result2 extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class Result2 extends React.Component {
 
   render() {
     var transaction = this.state.transaction;
-    var date = new Date(transaction.originalDate).toUTCString().replace(":00:00 GMT", "PM");
+    var date = new Date(transaction.originalDate).toUTCString().replace(/\d\d:\d\d:\d\d GMT/g, "");
     var largestPurchase = this.prettyPrintNumber(Math.floor(this.state.largestTransaction));
     return (
       <div className="section-result2">
@@ -39,7 +39,8 @@ export default class Result2 extends React.Component {
 
             <div className="large-4 distance3 cell">
               <div className="card-dark">
-                <p>You made the purchase of <strong>{largestPurchase} kr</strong> at <strong>{transaction.formattedDescription}</strong> on <strong>{date}</strong>.</p>
+                <p>You made the purchase of <strong>{largestPurchase} kr</strong> at <strong>{transaction.formattedDescription}</strong></p>
+                <p><strong>{date}</strong></p>
               </div>
             </div>
 
