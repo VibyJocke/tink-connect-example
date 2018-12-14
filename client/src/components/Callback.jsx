@@ -244,12 +244,12 @@ class Main extends React.Component {
       if (this.isNonBoringTransaction(transaction, transactionCategory)) {
         this.updateLargestTransaction(transaction);
         this.updateTopThreeVendors(transaction);
-        this.updateTotalSpend(transaction);
         this.updateTopCategory(transaction, transactionCategory);
-        this.updateNumberOfTransactions();
       }
       if (this.isExpense(transaction, transactionCategory)) {
+        this.updateTotalSpend(transaction);
         this.updateSpendingPerMonth(transaction);
+        this.updateNumberOfTransactions();
       }
       this.updateSavings(transaction, transactionCategory);
     }

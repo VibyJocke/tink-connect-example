@@ -41,7 +41,7 @@ export default class Main extends React.Component {
     window.removeEventListener('message', this.responseCallback, false);
   }
 
-  responseCallback = (event: MessageEvent) => {
+  responseCallback = (event) => {
     if (
       !event
       || !event.data
