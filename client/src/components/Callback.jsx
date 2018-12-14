@@ -158,7 +158,7 @@ class Main extends React.Component {
   }
 
   isExpense(transaction, category) {
-    return category.type !== "EXPENSE";
+    return category.type === "EXPENSES";
   }
 
   isDrinkingRelatedTransaction(transaction, category) {
