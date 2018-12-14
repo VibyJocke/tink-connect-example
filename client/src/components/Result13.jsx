@@ -5,30 +5,69 @@ export default class Result12Result extends React.Component {
     super(props);
 
     var results = JSON.parse(localStorage.getItem('result'));
+    var res2 = JSON.parse(localStorage.getItem('result'));
     console.log(results)
 
     this.state = {
-      youVsAverageSwede: results.youVsAverageSwede
+      min: 5,
+      max: 5,
+      sweCulture: 2394,
+      sweFood: 12324,
+      sweSports: 2496,
+      sweVacay: 10980,
+      youVsAverageSwede: results.youVsAverageSwede,
+      normalizedVsAvgSwede: res2.youVsAverageSwede
     };
+    // console.log(this.state);
+    this.findMinMax();
+    console.log(this.state);
+    this.normalizeAvgs();
+    // console.log(this.state);
   }
 
   prettyPrintNumber(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return Math.floor(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  }
+
+  findMinMax() {
+    var arr = [
+      this.state.sweCulture,
+      this.state.youVsAverageSwede['Culture & Events'],
+      this.state.sweFood,
+      this.state.youVsAverageSwede['Restaurants & Café'],
+      this.state.sweSports,
+      this.state.youVsAverageSwede['Sports & Fitness'],
+      this.state.sweVacay,
+      this.state.youVsAverageSwede['Vacation'],
+    ];
+    this.state.min = Math.min(...arr);
+    this.state.max = Math.max(...arr);
+  }
+
+  normalizeAvgs() {
+    this.state.normalizedVsAvgSwede['Culture & Events'] = this.normalize(this.state.youVsAverageSwede['Culture & Events']);
+    this.state.normalizedVsAvgSwede['Restaurants & Café'] = this.normalize(this.state.youVsAverageSwede['Restaurants & Café']);
+    this.state.normalizedVsAvgSwede['Sports & Fitness'] = this.normalize(this.state.youVsAverageSwede['Sports & Fitness']);
+    this.state.normalizedVsAvgSwede['Vacation'] = this.normalize(this.state.youVsAverageSwede['Vacation']);
   }
 
   normalize(num) {
-    return Math.floor(num / 60); //TODO make a less naive normalizer
+    return ((num - this.state.min) / (this.state.max - this.state.min)) * 250;
   }
 
   render() {
-    var culture = this.normalize(this.state.youVsAverageSwede['Culture & Events']);
-    var sweCulture = this.normalize(2394);
-    var food = this.normalize(this.state.youVsAverageSwede['Restaurants & Café']);
-    var sweFood = this.normalize(12324);
-    var sports = this.normalize(this.state.youVsAverageSwede['Sports & Fitness']);
-    var sweSports = this.normalize(2496);
-    var vacay = this.normalize(this.state.youVsAverageSwede['Vacation']);
-    var sweVacay = this.normalize(10980);
+    var culture = this.state.youVsAverageSwede['Culture & Events'];
+    var normCulture = this.state.normalizedVsAvgSwede['Culture & Events'];
+    var sweCulture = this.normalize(this.state.sweCulture);
+    var food = this.state.youVsAverageSwede['Restaurants & Café'];
+    var normFood = this.state.normalizedVsAvgSwede['Restaurants & Café'];
+    var sweFood = this.normalize(this.state.sweFood);
+    var sports = this.state.youVsAverageSwede['Sports & Fitness'];
+    var normSports = this.state.normalizedVsAvgSwede['Sports & Fitness'];
+    var sweSports = this.normalize(this.state.sweSports);
+    var vacay = this.state.youVsAverageSwede['Vacation'];
+    var normVacay = this.state.normalizedVsAvgSwede['Vacation'];
+    var sweVacay = this.normalize(this.state.sweVacay);
 
     return (
       <div className="section-result13">
@@ -44,10 +83,10 @@ export default class Result12Result extends React.Component {
 
             <div className="large-1 text-center align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
-                <svg height={food} viewBox={"0 0 40 " + food} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + food + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
+                <svg height={normFood} viewBox={"0 0 40 " + normFood} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + normFood + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>You</h4>
-              <h5>{this.prettyPrintNumber(food * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(food)} kr</h5>
             </div>
 
             <div className="large-1 text-center align-self-bottom cell">
@@ -55,16 +94,16 @@ export default class Result12Result extends React.Component {
                 <svg height={sweFood} viewBox={"0 0 40 " + sweFood} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + sweFood + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
-              <h5>{this.prettyPrintNumber(sweFood * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(this.state.sweFood)} kr</h5>
             </div>
 
 
             <div className="large-1 text-center large-offset-1 align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
-                <svg height={vacay} viewBox={"0 0 40 " + vacay} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + vacay + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
+                <svg height={normVacay} viewBox={"0 0 40 " + normVacay} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + normVacay + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>You</h4>
-              <h5>{this.prettyPrintNumber(vacay * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(vacay)} kr</h5>
             </div>
 
             <div className="large-1 text-center align-self-bottom cell">
@@ -72,16 +111,16 @@ export default class Result12Result extends React.Component {
                 <svg height={sweVacay} viewBox={"0 0 40 " + sweVacay} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + sweVacay + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
-              <h5>{this.prettyPrintNumber(sweVacay * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(this.state.sweVacay)} kr</h5>
             </div>
 
 
             <div className="large-1 text-center  large-offset-1 align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
-                <svg height={sports} viewBox={"0 0 40 " + sports} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + sports + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
+                <svg height={normSports} viewBox={"0 0 40 " + normSports} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + normSports + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>You</h4>
-              <h5>{this.prettyPrintNumber(sports * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(sports)} kr</h5>
             </div>
 
             <div className="large-1 text-center align-self-bottom cell">
@@ -89,16 +128,16 @@ export default class Result12Result extends React.Component {
                 <svg height={sweSports} viewBox={"0 0 40 " + sweSports} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + sweSports + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
-              <h5>{this.prettyPrintNumber(sweSports * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(this.state.sweSports)} kr</h5>
             </div>
 
 
             <div className="large-1 text-center  large-offset-1 align-self-bottom cell">
               <div className="large-1 align-self-bottom cell">
-                <svg height={culture} viewBox={"0 0 40 " + culture} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + culture + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
+                <svg height={normCulture} viewBox={"0 0 40 " + normCulture} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + normCulture + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>You</h4>
-              <h5>{this.prettyPrintNumber(culture * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(culture)} kr</h5>
             </div>
 
             <div className="large-1 text-center align-self-bottom cell">
@@ -106,7 +145,7 @@ export default class Result12Result extends React.Component {
                 <svg height={sweCulture} viewBox={"0 0 40 " + sweCulture} width="40" xmlns="http://www.w3.org/2000/svg"><path d={"m0 0h40v" + sweCulture + "h-40z"} fill="#f89572" fillRule="evenodd" /></svg>
               </div>
               <h4 style={{ paddingTop: '20px' }}>Swede</h4>
-              <h5>{this.prettyPrintNumber(sweCulture * 60)} kr</h5>
+              <h5>{this.prettyPrintNumber(this.state.sweCulture)} kr</h5>
             </div>
 
 

@@ -262,7 +262,7 @@ class Main extends React.Component {
     this.results.youVsAverageSwede["Vacation"] = this.topSubCategoryResult["Vacation"];
     this.results.youVsAverageSwede["Sports & Fitness"] = this.topSubCategoryResult["Sports & Fitness"];
     this.results.youVsAverageSwede["Culture & Events"] = this.topSubCategoryResult["Culture & Events"];
-    console.log(this.results.youVsAverageSwede);
+    console.log("AVERAGE: " + this.results.youVsAverageSwede);
   }
 
   updateNumberOfTransactions() {
