@@ -17,6 +17,7 @@ import Result11Opts from './Result11Opts';
 import Result11Result from './Result11Result';
 import Result12Opts from './Result12Opts';
 import Result12Result from './Result12Result';
+import Result13 from './Result13';
 
 const App = () => (
   <Container>
@@ -37,6 +38,7 @@ const App = () => (
       <Route exact path="/result-11-res" component={Result11Result} />
       <Route exact path="/result-12-opts" component={Result12Opts} />
       <Route exact path="/result-12-res" component={Result12Result} />
+      <Route exact path="/result-13" component={Result13} />
     </Switch>
   </Container>
 );
