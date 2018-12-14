@@ -5,7 +5,7 @@ export default class Result6 extends React.Component {
     super(props);
 
     var result = JSON.parse(localStorage.getItem('result')).transactionsPerMonth;
-    console.log(result.transactionsPerMonth)
+    console.log(result)
 
     const noData = 5;
 
@@ -15,7 +15,7 @@ export default class Result6 extends React.Component {
         months: [
             result['January'] ? result['January'] : noData,
             result['February'] ? result['February'] : noData,
-            result['Mars'] ? result['Mars'] : noData,
+            result['March'] ? result['March'] : noData,
             result['April'] ? result['April'] : noData,
             result['May'] ? result['May'] : noData,
             result['June'] ? result['June'] : noData,
